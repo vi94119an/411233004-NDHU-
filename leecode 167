@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+       int left = 0;   //從第一個位置開始
+       int right = numbers.size() - 1;  //從最後一個位置開始
+        vector<int> v;
+        while (left < right){
+          int sum = numbers[left] + numbers[right];  //左右兩個位置的數字加起來 
+          if (sum == target) {
+                v.push_back(left+1);
+                v.push_back(right+1);
+                return v;
+            } //等於目標值 回傳
+          if (sum < target){
+            left++;
+          }else{
+            right--;  
+            }//只要太大就往左變小一個數字
+          }
+         return v;
+    }
+};
