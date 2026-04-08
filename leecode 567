@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+       if (s1.length() > s2.length()) return false; 
+
+       vector<int> count1(26, 0), count2(26, 0); //cnt1 記 s1 每個字母出現幾次，cnt2 記目前視窗內每個字母出現幾次
+          for (char c : s1) //s1 裡的字母一個一個看，記錄它出現幾次
+        { 
+        count1[c - 'a']++; //把字母變成數字位置 a=0/b=1/c=2
+        }
+       
+        int n = s1.length();
+
+        // 先建立 s2 的第一個長度為 n 的視窗
+        for (int i = 0; i < n; i++) {
+            count2[s2[i] - 'a']++;
+        }
+
+        // 先比第一個視窗
+        if (count1 == count2) return true;
+
+        // 再開始往右滑
+        for (int i = n; i < s2.length(); i++) {
+            count2[s2[i] - 'a']++;        // 加入新字母
+            count2[s2[i - n] - 'a']--;    // 移除舊字母
+
+            if (count1 == count2) return true;
+        }
+
+        return false;
+    }
+};
