@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> getAverages(vector<int>& nums, int k) {
+        int n = nums.size();
+        vector<int> ans(n, -1); //長度 n，一開始先全部設成每格先放 -1
+        int len = 2 * k + 1; 
+        if (len > n) return ans;//整個陣列長度都不夠，就直接回傳全 -1
+        long long sum = 0;
+
+        for (int i = 0; i < len; i++) {
+            sum += nums[i];
+        }
+        ans[k] = sum / len;
+
+        for (int i = len; i < n; i++) //i 表示新加入視窗的右邊元素位置。
+        {
+            sum += nums[i]; //往右+1個數字
+            sum -= nums[i - len]; //左邊第一個數字移走，往右+1個數字
+            ans[i - k] = sum / len;//右端是 i，左端就是i−len+1，中間(i−len+1)+k
+        }
+
+        return ans;
+    }
+};
