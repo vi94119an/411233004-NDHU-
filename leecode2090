@@ -16,7 +16,7 @@ public:
         {
             sum += nums[i]; //往右+1個數字
             sum -= nums[i - len]; //左邊第一個數字移走，往右+1個數字
-            ans[i - k] = sum / len;//右端是 i，左端就是i−len+1，中間(i−len+1)+k
+            ans[i - k] = sum / len;//右端是 i，左端就是i−len+1，中間(i−len+1)+k，算位置
         }
 
         return ans;
