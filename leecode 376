@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int wiggleMaxLength(vector<int>& nums) {
+
+        int size = nums.size();
+
+        // 最後為上升的最長長度
+        int peak = 1;
+
+        // 最後為下降的最長長度
+        int valley = 1;
+
+        // 從第二個元素開始比較
+        for(int i = 1; i < size; ++i){
+
+            // 目前為上升
+            // 下降 -> 上升
+            if(nums[i] > nums[i-1])
+                peak = valley + 1;
+
+            // 目前為下降
+            // 上升 -> 下降
+            else if(nums[i] < nums[i-1])
+                valley = peak + 1;
+
+            // 相等不更新
+        }
+
+        // 回傳最大長度
+        return max(peak , valley );
+    }
+};
